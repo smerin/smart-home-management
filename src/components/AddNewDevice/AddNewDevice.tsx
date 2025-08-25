@@ -2,12 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { createDevice } from "../../services/devices";
-import {
-  CreateDeviceRequest,
-  DeviceType,
-  StatusTypes,
-} from "../../types/devices";
+import { createDevice } from "@/services/devices";
+import { CreateDeviceRequest, DeviceType, StatusTypes } from "@/types/devices";
 import styles from "./AddNewDevice.module.css";
 
 export default function AddNewDevice() {

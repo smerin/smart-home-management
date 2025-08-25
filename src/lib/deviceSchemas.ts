@@ -1,3 +1,5 @@
+// TODO: Is this in the right place / still relevant?
+
 // Simple validation for device properties
 export function validateProperties(properties: any): {
   isValid: boolean;

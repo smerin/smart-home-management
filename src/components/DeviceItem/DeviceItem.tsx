@@ -1,7 +1,7 @@
 "use client";
 
-import { deleteDevice } from "../../services/devices";
-import { Device } from "../../types/devices";
+import { deleteDevice } from "@/services/devices";
+import { Device } from "@/types/devices";
 import styles from "./DeviceItem.module.css";
 
 interface DeviceItemProps {

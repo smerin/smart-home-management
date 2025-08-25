@@ -4,7 +4,7 @@ import {
   DeviceStatus,
   CreateDeviceRequest,
   DeleteDeviceResponse,
-} from "../types/devices";
+} from "@/types/devices";
 
 const API_BASE = "/api/devices";
 

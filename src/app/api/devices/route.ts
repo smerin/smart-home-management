@@ -1,13 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "../../../lib/prisma";
-import {
-  isValidDeviceType,
-  isValidDeviceStatus,
-} from "../../../lib/deviceTypes";
-import {
-  validateProperties,
-  getDefaultProperties,
-} from "../../../lib/deviceSchemas";
+import { prisma } from "@/lib/prisma";
+import { isValidDeviceType, isValidDeviceStatus } from "@/lib/deviceTypes";
+import { validateProperties, getDefaultProperties } from "@/lib/deviceSchemas";
 
 // GET /api/devices - List all devices
 export async function GET() {

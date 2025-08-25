@@ -1,6 +1,6 @@
 import Link from "next/link";
-import DeviceList from "../components/DeviceList/DeviceList";
-import { getAllDevices } from "../services/devices";
+import DeviceList from "@/components/DeviceList/DeviceList";
+import { getAllDevices } from "@/services/devices";
 import styles from "./page.module.css";
 
 export default async function Home() {

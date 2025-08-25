@@ -1,3 +1,5 @@
+// TODO: Is this in the right place / still relevant?
+
 import { DeviceType, DeviceStatus } from "@prisma/client";
 
 // Extract the values from Prisma enums

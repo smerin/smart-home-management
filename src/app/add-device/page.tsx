@@ -1,4 +1,4 @@
-import AddNewDevice from "../../components/AddNewDevice/AddNewDevice";
+import AddNewDevice from "@/components/AddNewDevice/AddNewDevice";
 import styles from "./page.module.css";
 
 export default async function Home() {

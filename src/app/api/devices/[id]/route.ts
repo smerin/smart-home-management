@@ -1,10 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "../../../../lib/prisma";
-import {
-  isValidDeviceType,
-  isValidDeviceStatus,
-} from "../../../../lib/deviceTypes";
-import { validateProperties } from "../../../../lib/deviceSchemas";
+import { prisma } from "@/lib/prisma";
+import { isValidDeviceType, isValidDeviceStatus } from "@/lib/deviceTypes";
+import { validateProperties } from "@/lib/deviceSchemas";
 
 // DELETE /api/devices/[id] - Delete device
 export async function DELETE(
