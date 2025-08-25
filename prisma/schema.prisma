@@ -1,0 +1,34 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum DeviceType {
+  LIGHT
+  THERMOSTAT
+  CAMERA
+}
+
+enum DeviceStatus {
+  ONLINE
+  OFFLINE
+  ERROR
+}
+
+model Device {
+  id          String       @id @default(cuid()) // Auto-generated unique ID
+  name        String                            // Device name like "Living Room Light"
+  type        DeviceType                        // Must be LIGHT, THERMOSTAT, or CAMERA
+  status      DeviceStatus @default(OFFLINE)    // Defaults to OFFLINE when created
+  isActive    Boolean      @default(false)      // Is the device turned on?
+  location    String?                           // Optional - which room
+  properties  String       @default("{}")       // JSON string for device-specific data
+  createdAt   DateTime     @default(now())      // When was this created
+  updatedAt   DateTime     @updatedAt           // Auto-updated when modified
+
+  @@map("devices") // This will be the actual table name in SQLite
+}
