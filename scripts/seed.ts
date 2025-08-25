@@ -12,9 +12,9 @@ async function main() {
   // Create sample IoT devices using your simplified properties
   const devices = [
     {
-      name: "Living Room Smart Light",
+      name: "Living room light",
       type: DeviceType.LIGHT,
-      location: "Living Room",
+      location: "Living room",
       status: DeviceStatus.ONLINE,
       isActive: true,
       properties: JSON.stringify({
@@ -23,7 +23,7 @@ async function main() {
       }),
     },
     {
-      name: "Bedroom Light",
+      name: "Bedroom light",
       type: DeviceType.LIGHT,
       location: "Bedroom",
       status: DeviceStatus.OFFLINE,
@@ -34,7 +34,7 @@ async function main() {
       }),
     },
     {
-      name: "Main Thermostat",
+      name: "Main thermostat",
       type: DeviceType.THERMOSTAT,
       location: "Hallway",
       status: DeviceStatus.ONLINE,
@@ -45,9 +45,9 @@ async function main() {
       }),
     },
     {
-      name: "Upstairs Thermostat",
+      name: "Upstairs thermostat",
       type: DeviceType.THERMOSTAT,
-      location: "Upstairs Hall",
+      location: "Upstairs landing",
       status: DeviceStatus.ONLINE,
       isActive: false,
       properties: JSON.stringify({
@@ -56,7 +56,7 @@ async function main() {
       }),
     },
     {
-      name: "Front Door Camera",
+      name: "Front door camera",
       type: DeviceType.CAMERA,
       location: "Front Door",
       status: DeviceStatus.ONLINE,
@@ -66,9 +66,9 @@ async function main() {
       }),
     },
     {
-      name: "Backyard Camera",
+      name: "Garden camera",
       type: DeviceType.CAMERA,
-      location: "Backyard",
+      location: "Garden",
       status: DeviceStatus.ERROR,
       isActive: false,
       properties: JSON.stringify({
