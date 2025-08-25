@@ -24,6 +24,12 @@ export interface CreateDeviceRequest {
   properties?: Record<string, any>;
 }
 
+export interface DeleteDeviceResponse {
+  message: string;
+  id: string;
+  name: string;
+}
+
 export enum StatusTypes {
   LOADING = "loading",
   ERROR = "error",

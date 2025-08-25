@@ -12,7 +12,7 @@ export default function DeviceList({ devices }: DeviceListProps) {
       <h2>My devices</h2>
       <ul className={styles.devices}>
         {devices.map((device) => (
-          <li>
+          <li key={device.id}>
             <DeviceItem device={device} />
           </li>
         ))}

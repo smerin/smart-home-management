@@ -3,6 +3,7 @@ import {
   DeviceType,
   DeviceStatus,
   CreateDeviceRequest,
+  DeleteDeviceResponse,
 } from "../types/devices";
 
 const API_BASE = "/api/devices";
@@ -58,5 +59,12 @@ export async function createDevice(data: CreateDeviceRequest): Promise<Device> {
   return await apiCall<Device>(API_BASE, {
     method: "POST",
     body: JSON.stringify(data),
+  });
+}
+
+export async function deleteDevice(id: string): Promise<DeleteDeviceResponse> {
+  console.log(`Deleting device: ${id}`);
+  return await apiCall(`${API_BASE}/${id}`, {
+    method: "DELETE",
   });
 }
