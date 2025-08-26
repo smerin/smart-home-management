@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { notFound } from "next/navigation";
 import { getDeviceById } from "@/services/devices";
 import DeviceDetail from "@/components/DeviceDetail/DeviceDetail";

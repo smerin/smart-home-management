@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { getAllDevices } from "@/services/devices";
 import DeviceList from "@/components/DeviceList/DeviceList";
 
