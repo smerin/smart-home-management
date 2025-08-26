@@ -24,6 +24,15 @@ export interface CreateDeviceRequest {
   properties?: Record<string, any>;
 }
 
+export interface UpdateDeviceRequest {
+  name?: string;
+  type?: DeviceType;
+  location?: string | null;
+  status?: DeviceStatus;
+  isActive?: boolean;
+  properties?: Record<string, any>;
+}
+
 export interface DeleteDeviceResponse {
   message: string;
   id: string;

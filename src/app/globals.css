@@ -96,3 +96,10 @@ main {
 .button:hover {
   background-color: var(--java);
 }
+
+.button[data-delete="true"] {
+  background-color: var(--error);
+}
+.button[data-delete="true"]:hover {
+  background-color: var(--charcoal);
+}

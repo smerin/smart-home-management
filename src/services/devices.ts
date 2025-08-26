@@ -1,9 +1,8 @@
 import {
   Device,
-  DeviceType,
-  DeviceStatus,
   CreateDeviceRequest,
   DeleteDeviceResponse,
+  UpdateDeviceRequest,
 } from "@/types/devices";
 
 const API_BASE = "/api/devices";
@@ -65,6 +64,17 @@ export async function createDevice(data: CreateDeviceRequest): Promise<Device> {
 export async function getDeviceById(id: string): Promise<Device> {
   console.log(`Fetching device: ${id}`);
   return await apiCall<Device>(`${API_BASE}/${id}`);
+}
+
+export async function updateDevice(
+  id: string,
+  data: UpdateDeviceRequest
+): Promise<Device> {
+  console.log(`Updating device: ${id}`);
+  return await apiCall<Device>(`${API_BASE}/${id}`, {
+    method: "PUT",
+    body: JSON.stringify(data),
+  });
 }
 
 export async function deleteDevice(id: string): Promise<DeleteDeviceResponse> {

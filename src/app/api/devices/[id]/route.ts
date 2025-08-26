@@ -35,6 +35,106 @@ export async function GET(
   }
 }
 
+// PUT /api/devices/[id] - Update device
+export async function PUT(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  try {
+    const { id } = params;
+    console.log(`PUT /api/devices/${id} - Updating device`);
+
+    const body = await request.json();
+    console.log("Request body:", body);
+
+    const { name, type, location, properties, status, isActive } = body;
+
+    // Check if device exists first
+    const existingDevice = await prisma.device.findUnique({
+      where: { id },
+    });
+
+    if (!existingDevice) {
+      console.log(`❌ Device not found: ${id}`);
+      return NextResponse.json({ error: "Device not found" }, { status: 404 });
+    }
+
+    // Validate enum values if provided
+    if (type && !isValidDeviceType(type)) {
+      console.log("❌ Validation failed: invalid device type:", type);
+      return NextResponse.json(
+        {
+          error: "Invalid device type",
+        },
+        { status: 400 }
+      );
+    }
+
+    if (status && !isValidDeviceStatus(status)) {
+      console.log("❌ Validation failed: invalid device status:", status);
+      return NextResponse.json(
+        {
+          error: "Invalid device status",
+        },
+        { status: 400 }
+      );
+    }
+
+    // Build update data object
+    const updateData: any = {};
+    if (name !== undefined) {
+      updateData.name = name;
+    }
+    if (type !== undefined) {
+      updateData.type = type;
+    }
+    if (location !== undefined) {
+      updateData.location = location;
+    }
+    if (status !== undefined) {
+      updateData.status = status;
+    }
+    if (isActive !== undefined) {
+      updateData.isActive = isActive;
+    }
+
+    if (properties !== undefined) {
+      // Simple validation for properties
+      const validation = validateProperties(properties);
+      if (!validation.isValid) {
+        console.log(
+          "❌ Validation failed: invalid properties:",
+          validation.error
+        );
+        return NextResponse.json(
+          { error: validation.error || "Invalid device properties" },
+          { status: 400 }
+        );
+      }
+      updateData.properties = JSON.stringify(properties);
+    }
+
+    // Update the device
+    const updatedDevice = await prisma.device.update({
+      where: { id },
+      data: updateData,
+    });
+
+    console.log(`✅ Device updated: ${updatedDevice.name}`);
+
+    return NextResponse.json({
+      ...updatedDevice,
+      properties: JSON.parse(updatedDevice.properties),
+    });
+  } catch (error: any) {
+    console.error("💥 Database error:", error);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
+  }
+}
+
 // DELETE /api/devices/[id] - Delete device
 export async function DELETE(
   request: NextRequest,
