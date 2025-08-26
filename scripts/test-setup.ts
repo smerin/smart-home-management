@@ -1,6 +1,7 @@
 // Simple test to make sure our setup works
-import { prisma } from "../src/lib/prisma";
-import { isValidDeviceType, DEVICE_TYPES } from "../src/lib/deviceTypes";
+import { getErrorMessage } from "@/utils";
+import { prisma } from "@/lib/prisma";
+import { isValidDeviceType, DEVICE_TYPES } from "@/lib/deviceTypes";
 
 async function testSetup() {
   console.log("🧪 Testing database setup...");
@@ -9,8 +10,8 @@ async function testSetup() {
   try {
     await prisma.$connect();
     console.log("✅ Database connection successful");
-  } catch (error: any) {
-    console.log("❌ Database connection failed:", error.message);
+  } catch (e) {
+    console.log("❌ Database connection failed:", getErrorMessage(e));
     return;
   }
 
@@ -35,8 +36,8 @@ async function testSetup() {
       where: { id: testDevice.id },
     });
     console.log("✅ Deleted test device");
-  } catch (error: any) {
-    console.log("❌ Database operation failed:", error.message);
+  } catch (e) {
+    console.log("❌ Database operation failed:", getErrorMessage(e));
   }
 
   await prisma.$disconnect();

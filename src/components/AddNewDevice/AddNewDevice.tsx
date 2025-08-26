@@ -23,7 +23,7 @@ export default function AddNewDevice() {
       } else {
         throw new Error();
       }
-    } catch (e) {
+    } catch {
       setStatus(StatusTypes.ERROR);
       setErrorMessage("Something went wrong. Please try again.");
     }

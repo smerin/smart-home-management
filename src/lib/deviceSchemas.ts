@@ -1,7 +1,7 @@
 // TODO: Is this in the right place / still relevant?
 
 // Simple validation for device properties
-export function validateProperties(properties: any): {
+export function validateProperties(properties: unknown): {
   isValid: boolean;
   error?: string;
 } {
@@ -14,7 +14,7 @@ export function validateProperties(properties: any): {
   try {
     JSON.stringify(properties);
     return { isValid: true };
-  } catch (error) {
+  } catch {
     return { isValid: false, error: "Properties must be serializable to JSON" };
   }
 }

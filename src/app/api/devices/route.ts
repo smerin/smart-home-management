@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { isValidDeviceType, isValidDeviceStatus } from "@/lib/deviceTypes";
 import { validateProperties, getDefaultProperties } from "@/lib/deviceSchemas";
+import { getErrorMessage } from "@/utils";
 
 // GET /api/devices - List all devices
 export async function GET() {
@@ -22,8 +23,8 @@ export async function GET() {
 
     console.log(`✅ Found ${devices.length} devices`);
     return NextResponse.json(devicesWithParsedProperties);
-  } catch (error: any) {
-    console.error("💥 Database error:", error);
+  } catch (e) {
+    console.error("💥 Database error:", getErrorMessage(e));
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }
@@ -111,8 +112,8 @@ export async function POST(request: NextRequest) {
       },
       { status: 201 }
     );
-  } catch (error: any) {
-    console.error("💥 Database error:", error);
+  } catch (e) {
+    console.error("💥 Database error:", getErrorMessage(e));
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }

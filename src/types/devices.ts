@@ -11,7 +11,7 @@ export { DeviceType, DeviceStatus };
 
 // Main Device type with parsed properties (Prisma stores properties as string)
 export interface Device extends Omit<PrismaDevice, "properties"> {
-  properties: Record<string, any>; // Parsed JSON properties
+  properties: Record<string, number | string | boolean>; // Parsed JSON properties
 }
 
 // API request types
@@ -21,7 +21,7 @@ export interface CreateDeviceRequest {
   location?: string;
   status?: DeviceStatus;
   isActive?: boolean;
-  properties?: Record<string, any>;
+  properties?: Record<string, number | string | boolean>;
 }
 
 export interface UpdateDeviceRequest {
@@ -30,7 +30,7 @@ export interface UpdateDeviceRequest {
   location?: string | null;
   status?: DeviceStatus;
   isActive?: boolean;
-  properties?: Record<string, any>;
+  properties?: Record<string, number | string | boolean>;
 }
 
 export interface DeleteDeviceResponse {

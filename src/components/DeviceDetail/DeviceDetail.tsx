@@ -23,7 +23,7 @@ export default function DeviceDetail({ device }: DeviceDetailProps) {
       await updateDevice(device.id, { isActive: isChecked });
       setIsActive(isChecked);
       setStatus(StatusTypes.SUCCESS);
-    } catch (e) {
+    } catch {
       setStatus(StatusTypes.ERROR);
       alert("Failed to update device status");
     }
@@ -34,7 +34,7 @@ export default function DeviceDetail({ device }: DeviceDetailProps) {
       setStatus(StatusTypes.LOADING);
       await deleteDevice(device.id);
       router.replace("/");
-    } catch (e) {
+    } catch {
       setStatus(StatusTypes.ERROR);
       alert("Failed to delete device");
     }

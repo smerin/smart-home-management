@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
 import { isValidDeviceType, isValidDeviceStatus } from "@/lib/deviceTypes";
 import { validateProperties } from "@/lib/deviceSchemas";
+import { prisma } from "@/lib/prisma";
+import { getErrorMessage } from "@/utils";
+import { UpdateDeviceRequest } from "@/types/devices";
 
 // GET /api/devices/[id] - Get device details
 export async function GET(
@@ -26,8 +28,8 @@ export async function GET(
       ...device,
       properties: JSON.parse(device.properties),
     });
-  } catch (error: any) {
-    console.error("💥 Database error:", error);
+  } catch (e) {
+    console.error("💥 Database error:", getErrorMessage(e));
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }
@@ -81,7 +83,10 @@ export async function PUT(
     }
 
     // Build update data object
-    const updateData: any = {};
+    const updateData: Omit<UpdateDeviceRequest, "properties"> & {
+      properties?: string;
+    } = {};
+
     if (name !== undefined) {
       updateData.name = name;
     }
@@ -126,8 +131,8 @@ export async function PUT(
       ...updatedDevice,
       properties: JSON.parse(updatedDevice.properties),
     });
-  } catch (error: any) {
-    console.error("💥 Database error:", error);
+  } catch (e) {
+    console.error("💥 Database error:", getErrorMessage(e));
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }
@@ -144,31 +149,30 @@ export async function DELETE(
     const { id } = params;
     console.log(`DELETE /api/devices/${id} - Deleting device`);
 
-    try {
-      const deletedDevice = await prisma.device.delete({
-        where: { id },
-      });
+    // Check if device exists first
+    const deletingDevice = await prisma.device.findUnique({
+      where: { id },
+    });
 
-      console.log(`✅ Device deleted: ${deletedDevice.name}`);
-
-      return NextResponse.json({
-        message: "Device deleted successfully",
-        id: deletedDevice.id,
-        name: deletedDevice.name,
-      });
-    } catch (error: any) {
-      if (error.code === "P2025") {
-        // Prisma error code for "Record not found"
-        console.log(`❌ Device not found: ${id}`);
-        return NextResponse.json(
-          { error: "Device not found" },
-          { status: 404 }
-        );
-      }
-      throw error;
+    if (!deletingDevice) {
+      console.log(`❌ Device not found: ${id}`);
+      return NextResponse.json({ error: "Device not found" }, { status: 404 });
     }
-  } catch (error: any) {
-    console.error("💥 Database error:", error);
+
+    // Device exists, so delete it
+    await prisma.device.delete({
+      where: { id },
+    });
+
+    console.log(`✅ Device deleted: ${deletingDevice.name}`);
+
+    return NextResponse.json({
+      message: "Device deleted successfully",
+      id: deletingDevice.id,
+      name: deletingDevice.name,
+    });
+  } catch (e) {
+    console.error("💥 Database error:", getErrorMessage(e));
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }
