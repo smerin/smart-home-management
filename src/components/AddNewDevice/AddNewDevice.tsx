@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { createDevice } from "@/services/devices";
 import { CreateDeviceRequest, DeviceType, StatusTypes } from "@/types/devices";
 import styles from "./AddNewDevice.module.css";
@@ -30,6 +31,7 @@ export default function AddNewDevice() {
 
   return (
     <div className={styles.addNewDevice}>
+      <Link href="/">&larr; Back to devices</Link>
       <div className={styles.buttons}>
         <button
           className="button"

@@ -62,6 +62,11 @@ export async function createDevice(data: CreateDeviceRequest): Promise<Device> {
   });
 }
 
+export async function getDeviceById(id: string): Promise<Device> {
+  console.log(`Fetching device: ${id}`);
+  return await apiCall<Device>(`${API_BASE}/${id}`);
+}
+
 export async function deleteDevice(id: string): Promise<DeleteDeviceResponse> {
   console.log(`Deleting device: ${id}`);
   return await apiCall(`${API_BASE}/${id}`, {

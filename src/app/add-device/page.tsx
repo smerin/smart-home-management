@@ -1,10 +1,9 @@
 import AddNewDevice from "@/components/AddNewDevice/AddNewDevice";
-import styles from "./page.module.css";
 
-export default async function Home() {
+export default async function AddDevicePage() {
   return (
-    <main className={styles.main}>
-      <div className={styles.container}>
+    <main>
+      <div className="container">
         <AddNewDevice />
       </div>
     </main>

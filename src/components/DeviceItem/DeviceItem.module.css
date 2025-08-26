@@ -1,6 +1,34 @@
 .deviceItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
   text-align: left;
-  background: #eee;
+  background: var(--light-grey);
   padding: 2rem;
-  min-width: 60rem;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+.deviceItem:hover {
+  background: var(--medium-grey);
+  text-decoration: none;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.light {
+  display: block;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  background-color: var(--error);
+
+  &[data-active="true"] {
+    background-color: var(--success);
+  }
 }
