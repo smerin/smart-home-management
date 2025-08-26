@@ -8,10 +8,10 @@ import { UpdateDeviceRequest } from "@/types/devices";
 // GET /api/devices/[id] - Get device details
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const { id } = await params;
     console.log(`GET /api/devices/${id} - Getting device details`);
 
     const device = await prisma.device.findUnique({
@@ -40,10 +40,10 @@ export async function GET(
 // PUT /api/devices/[id] - Update device
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const { id } = await params;
     console.log(`PUT /api/devices/${id} - Updating device`);
 
     const body = await request.json();
@@ -143,10 +143,10 @@ export async function PUT(
 // DELETE /api/devices/[id] - Delete device
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const { id } = await params;
     console.log(`DELETE /api/devices/${id} - Deleting device`);
 
     // Check if device exists first
