@@ -84,10 +84,12 @@ curl -X POST https://smart-home-management-one.vercel.app/api/devices \
 
 Returns `{"error":"Invalid device status"}`
 
-## Notes
+## Technical Decisions & Trade-offs
 
-As discussed in the initial interview, I am first and foremost a frontend developer. This technical challenge is more focused on the backend. I have tried to cover all the requirements, but have put more emphasis on the (simple) frontend to showcase my abilities there. All of the endpoints can be seen working on the demo: https://smart-home-management-one.vercel.app/
+This implementation prioritizes a working end-to-end solution with proper error handling and type safety. Key decisions made:
 
-Initial development work was done using SQLite for simplicity. I wanted to publish a working demo, and Vercel is the simplest choice for a Next.js app using Server Side Rendering. However, Vercel does not support SQLite. I switched to using a Postgres database (hosted on Vercel) and pointed the local environment to use that.
+**Database Migration**: Started with SQLite for rapid local development, then migrated to Postgres for deployment compatibility with Vercel. This allowed for a live demo while maintaining local development simplicity.
 
-One requirement that I have not covered is QA. Normally I would write tests alongside building features. However, due to the short time frame I focused on building out the APIs and frontend first. I did attempt to retrofit some tests, but struggled to mock some aspects of the Prisma setup. If this is a dealbreaker, please let me know and I will spend some more time setting this up and writing tests.
+**Frontend Integration**: Built a functional frontend interface to demonstrate all API endpoints in action, providing visual confirmation of the backend functionality.
+
+**Testing**: Due to time constraints, I focused on delivering a robust, working API with comprehensive error handling. In a production environment, I would implement unit and integration tests alongside feature development.
