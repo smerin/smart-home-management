@@ -32,6 +32,7 @@ export default function AddNewDevice() {
   return (
     <div className={styles.addNewDevice}>
       <Link href="/">&larr; Back to devices</Link>
+      <p>Add an extra device with pre-configured settings:</p>
       <div className={styles.buttons}>
         <button
           className="button"

@@ -89,13 +89,15 @@ main {
   font-size: 2rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
   transition: all 0.3s;
   cursor: pointer;
-  text-align: center;
 }
 
 .button:hover {
   background-color: var(--java);
+  text-decoration: none;
 }
 
 .button[data-delete="true"] {
